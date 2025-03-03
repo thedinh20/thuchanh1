@@ -70,13 +70,19 @@ const SignIn = ({ navigation }) => {
       <Text style={styles.title1}>
         with nectar
       </Text>
-
-      <TextInput
+      <View style={styles.inputContainer}>
+        <Image
+          source={require('./assets/phone_icon.png')}
+          style={styles.phoneIcon}
+        />
+        <Text style={styles.countryCode}>+880</Text>
+        <TextInput
           style={styles.input}
-          
           placeholder="Enter your phone number"
           keyboardType="phone-pad"
-      />
+          onFocus={() => navigation.navigate('number')} // Điều hướng khi nhấn vào TextInput
+        />
+      </View>
       <Text style={styles.socialMediaText}>Or connect with social media</Text>
       <View style={styles.buttonContainer}>
       
@@ -95,21 +101,49 @@ const SignIn = ({ navigation }) => {
 
 const number = ({ navigation }) => {
   return(
-    <View style={styles.numberContainer}>
-      <Text>
+      <View style={styles.numberContainer}>
         <TouchableOpacity style={styles.btnBack} onPress={() => navigation.navigate('SignIn')} >
-          <Text>{'<'}</Text>
+          <Text style={styles.btnBackText}>{'<'}</Text>
         </TouchableOpacity>
-      </Text>
-      <Text style={styles.mobileNumberText}>Nhập số điện thoại của bạn</Text>
-    </View>
-  );
+        <Text style={styles.mobileNumberText}>Enter your phone number</Text>
+        <Text style={styles.mobileNumberLabel}>Mobile Number</Text>
+        <View style={styles.phoneInputContainer}>
+          <Image
+            source={require('./assets/phone_icon.png')}
+            style={styles.phoneIcon}
+          />
+          <Text style={styles.countryCode}>+880</Text>
+          <TextInput
+            style={styles.phoneNumberInput}
+            placeholder="Phone number"
+            keyboardType="phone-pad"
+          />
+        </View>
+        <TouchableOpacity style={styles.btnNext} onPress={() => navigation.navigate('verification')}>
+          <Text style={styles.btnNextText}>{'>'}</Text>
+        </TouchableOpacity>
+      </View>
+    );
 };
 
 const verification = () => {
-  <View style={styles.numberContainer}>
-    <Text>hakhfkaf</Text>
-  </View>
+  return (
+      <View style={styles.numberContainer}>
+        <TouchableOpacity style={styles.btnBack} onPress={() => navigation.navigate('SignIn')} >
+          <Text style={styles.btnBackText}>{'<'}</Text>
+        </TouchableOpacity>
+        <Text style={styles.verificationText}>Enter your 4-digit code</Text>
+        <Text style={styles.codeLabel}>Code</Text>
+        <TextInput
+          style={styles.codeInput}
+          placeholder="Enter code"
+          keyboardType="number-pad"
+        />
+        <TouchableOpacity style={styles.btnNext} onPress={() => navigation.navigate('nextScreen')}>
+          <Text style={styles.btnNextText}>{'>'}</Text>
+        </TouchableOpacity>
+      </View>
+    );
 };
 
 const App = () => {
@@ -238,6 +272,16 @@ const styles = StyleSheet.create({
     color: ' #030303',
     position:'absolute'
   },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 490,
+    marginLeft: 25,
+    position: 'absolute',
+    borderBottomWidth: 1,
+    borderColor: '#E2E2E2',
+  },
+
   input: {
     width: 364,
     height: 39.550201416015625,
@@ -257,6 +301,17 @@ const styles = StyleSheet.create({
     marginLeft: 100,
 
   },
+  ountryCode: {
+    fontSize: 18,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  phoneIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+
   buttonContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -290,7 +345,8 @@ const styles = StyleSheet.create({
   },
   numberContainer: {
     flex:1,
-    backgroundColor:'#fcfcfc'
+    backgroundColor:'#fcfcfc',
+    padding: 20,
   },
   mobileNumberText: {
     marginTop: 140.02,
@@ -302,6 +358,86 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     color: '#181725',
     
+  },
+  
+  btnBack: {
+    marginBottom: 20,
+  },
+  btnBackText: {
+    paddingTop: 30,
+    marginBottom: 20,
+    fontSize: 24,
+    color: '#000',
+  },
+
+  mobileNumberText: {
+    fontFamily: 'Gilroy',
+    fontWeight: '600',
+    fontSize: 26,
+    lineHeight: 29,
+    letterSpacing: 0,
+    color: '#181725',
+    marginBottom: 20,
+  },
+  mobileNumberLabel: {
+    fontFamily: 'Gilroy',
+    fontWeight: '600',
+    fontSize: 18,
+    lineHeight: 21,
+    letterSpacing: 0,
+    color: '#181725',
+    marginBottom: 10,
+  },
+  phoneInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#E2E2E2',
+    paddingBottom: 5,
+  },
+  phoneNumberInput: {
+    flex: 1,
+    fontSize: 18,
+  },
+  btnNext: {
+    marginTop: 20,
+    alignSelf: 'flex-end',
+    backgroundColor: '#5eb078',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnNextText: {
+    fontSize: 24,
+    color: '#fff',
+  },
+  verificationText: {
+    fontFamily: 'Gilroy',
+    fontWeight: '600',
+    fontSize: 26,
+    lineHeight: 29,
+    letterSpacing: 0,
+    color: '#181725',
+    marginBottom: 20,
+  },
+  codeLabel: {
+    fontFamily: 'Gilroy',
+    fontWeight: '600',
+    fontSize: 18,
+    lineHeight: 21,
+    letterSpacing: 0,
+    color: '#181725',
+    marginBottom: 10,
+  },
+  codeInput: {
+    // flex: 1,
+    fontSize: 18,
+    borderBottomWidth: 1,
+    borderColor: '#E2E2E2',
+    paddingBottom: 5,
+    padding:20,
   },
 });
 
